@@ -1,16 +1,17 @@
-import { InputHTMLAttributes } from "react";
+import { forwardRef, InputHTMLAttributes } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
 }
 
-export function Input({ placeholder, name, id, ...props }: InputProps) {
+export const Input = forwardRef<HTMLInputElement, InputProps>(({ placeholder, name, id, ...props }, ref) => {
   const inputId = id ?? name
 
   return (
     <div className="relative">
       <input
         {...props}
+        ref={ref}
         name={name}
         id={inputId}
         className="bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px]
@@ -27,4 +28,4 @@ export function Input({ placeholder, name, id, ...props }: InputProps) {
       </label>
     </div>
   )
-}
+})
