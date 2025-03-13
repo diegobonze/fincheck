@@ -4,7 +4,7 @@ import { Button } from "../../components/Button";
 import { useLoginController } from "./useLoginController";
 
 export function Login() {
-  const { handleSubmit, register, errors } = useLoginController()
+  const { handleSubmit, register, errors, isPending } = useLoginController()
 
   return (
     <>
@@ -33,18 +33,20 @@ export function Login() {
         <Input
           type="email"
           placeholder="E-mail"
+          error={errors.email?.message}
           {...register('email')}
         />
-        {errors.email && <span>{errors.email.message}</span>}
+        {errors.email && <span>{}</span>}
 
         <Input
           type="password"
           placeholder="Senha"
+          error={errors.password?.message}
           {...register('password')}
         />
-        {errors.password && <span>{errors.password.message}</span>}
 
         <Button
+          isPending={isPending}
           type="submit"
           className="mt-2"
         >
