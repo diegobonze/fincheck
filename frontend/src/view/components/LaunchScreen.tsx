@@ -24,6 +24,5 @@ export function LaunchScreen({ isLoading }: LaunchScreenProps) {
         </div>
       </div>
     </Transition>
-
   )
 }
