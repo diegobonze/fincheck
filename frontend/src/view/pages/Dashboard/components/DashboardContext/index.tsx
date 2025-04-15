@@ -9,6 +9,16 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
     return storageValue ? JSON.parse(storageValue) : false
   })
 
+  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState<boolean>(true)
+
+  const openNewAccountModal = useCallback(() => {
+    setIsNewAccountModalOpen(true)
+  }, [])
+
+  const closeNewAccountModal = useCallback(() => {
+    setIsNewAccountModalOpen(false)
+  }, [])
+
   const toggleValuesVisibility = useCallback(() => {
     setAreValuesNotVisible(prevState => {
       const newValue = !prevState
@@ -24,6 +34,9 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
       value={{
         areValuesNotVisible,
         toggleValuesVisibility,
+        isNewAccountModalOpen,
+        openNewAccountModal,
+        closeNewAccountModal,
       }}
     >
       {children}
