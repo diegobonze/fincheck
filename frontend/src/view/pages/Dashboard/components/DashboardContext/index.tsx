@@ -9,14 +9,26 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
     return storageValue ? JSON.parse(storageValue) : false
   })
 
-  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState<boolean>(true)
+  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false)
+  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false)
+  const [newTransactionType, setNewTransactionType] = useState<'INCOME' | 'EXPENSE' | null>(null)
 
   const openNewAccountModal = useCallback(() => {
     setIsNewAccountModalOpen(true)
   }, [])
 
   const closeNewAccountModal = useCallback(() => {
-    setIsNewAccountModalOpen(false)
+    setTimeout(() => {setIsNewAccountModalOpen(false)}, 50)
+  }, [])
+
+  const openNewTransactionModal = useCallback((type: 'INCOME' | 'EXPENSE') => {
+    setNewTransactionType(type)
+    setIsNewTransactionModalOpen(true)
+  }, [])
+
+  const closeNewTransactionModal = useCallback(() => {
+    setNewTransactionType(null)
+    setIsNewTransactionModalOpen(false)
   }, [])
 
   const toggleValuesVisibility = useCallback(() => {
@@ -35,8 +47,12 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
         areValuesNotVisible,
         toggleValuesVisibility,
         isNewAccountModalOpen,
+        isNewTransactionModalOpen,
+        newTransactionType,
         openNewAccountModal,
         closeNewAccountModal,
+        openNewTransactionModal,
+        closeNewTransactionModal,
       }}
     >
       {children}

@@ -1,13 +1,17 @@
 import { useDashboard } from "../../useDashboard";
 
-export function useNewAccountModal() {
+export function useNewAccountModalController() {
   const {
     closeNewAccountModal,
-    isNewAccountModalOpen
+    isNewAccountModalOpen,
+    isColorsDropdownOpen,
+    closeColorsDropdown,
   } = useDashboard()
 
   return {
     closeNewAccountModal,
     isNewAccountModalOpen,
+    isColorsDropdownOpen,
+    closeColorsDropdown,
   }
 }

@@ -60,7 +60,7 @@ export function Select({ className, error, placeholder, options }: SelectProps) 
                   <RdxSelect.Item
                     key={options.value}
                     value={options.value}
-                    className="p-2 text-gray-800 text-sm data-[state=checked]:font-bold outline-none data-[highlighted]:bg-gray-50 rounded-lg transition-colors"
+                    className="p-2 text-gray-800 text-sm data-[state=checked]:font-bold outline-none data-[highlighted]:bg-gray-50 rounded-lg transition-colors cursor-default"
                   >
                     <RdxSelect.ItemText>{options.label}</RdxSelect.ItemText>
                   </RdxSelect.Item>
