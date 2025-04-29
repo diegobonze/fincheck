@@ -47,7 +47,7 @@ export function NewTransactionModal() {
                 label: 'Conta Corrente',
               },
               {
-                value: 'INVESTMENTS',
+                value: 'INVESTMENT',
                 label: 'Investimentos',
               },
               {
@@ -65,7 +65,7 @@ export function NewTransactionModal() {
                 label: 'Conta Corrente',
               },
               {
-                value: 'INVESTMENTS',
+                value: 'INVESTMENT',
                 label: 'Investimentos',
               },
               {

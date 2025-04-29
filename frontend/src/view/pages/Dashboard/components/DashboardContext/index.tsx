@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { DashboardContext } from "./useDashboard";
 import { localStorageKeys } from "../../../../../app/config/localStorageKeys";
+import { BankAccount } from "../../../../../entities/BankAccount";
 
 export function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [areValuesNotVisible, setAreValuesNotVisible] = useState<boolean>(() => {
@@ -12,6 +13,10 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false)
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false)
   const [newTransactionType, setNewTransactionType] = useState<'INCOME' | 'EXPENSE' | null>(null)
+  const [isEditAccountModalOpen, setIsEditAccountModalOpen] = useState(false)
+  const [accountBeingEdited, setAccountBeingEdited] = useState<null | BankAccount>(null)
+
+  console.log(isEditAccountModalOpen)
 
   const openNewAccountModal = useCallback(() => {
     setIsNewAccountModalOpen(true)
@@ -41,18 +46,32 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
     })
   }, [])
 
+  const openEditAccountModal = useCallback((bankAccount: BankAccount) => {
+    setAccountBeingEdited(bankAccount)
+    setIsEditAccountModalOpen(true)
+  }, [])
+
+  const closeEditAccountModal = useCallback(() => {
+    setAccountBeingEdited(null)
+    setTimeout(() => {setIsEditAccountModalOpen(false)}, 50)
+  }, [])
+
   return (
     <DashboardContext.Provider
       value={{
         areValuesNotVisible,
-        toggleValuesVisibility,
         isNewAccountModalOpen,
         isNewTransactionModalOpen,
         newTransactionType,
+        isEditAccountModalOpen,
+        accountBeingEdited,
+        toggleValuesVisibility,
         openNewAccountModal,
         closeNewAccountModal,
         openNewTransactionModal,
         closeNewTransactionModal,
+        openEditAccountModal,
+        closeEditAccountModal,
       }}
     >
       {children}

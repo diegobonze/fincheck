@@ -46,7 +46,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider
       value={{
         signedIn: isSuccess && signedIn,
-        signin, signout
+        signin,
+        signout,
       }}
     >
       <LaunchScreen isLoading={isFetching} />
