@@ -17,12 +17,12 @@ export class TransactionService {
   async create(userId: string, createTransactionDto: CreateTransactionDto) {
     
     const { 
-      bankAccountId, 
-      categoryId, 
-      date, 
-      name, 
+      bankAccountId,
+      categoryId,
+      date,
+      name,
       value,
-      type 
+      type,
     } = createTransactionDto
 
     await this.validateEntitiesOwnership({

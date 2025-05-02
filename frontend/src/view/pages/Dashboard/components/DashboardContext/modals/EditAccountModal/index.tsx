@@ -6,6 +6,8 @@ import { InputCurrency } from "../../../../../../components/InputCurrency";
 import { Modal } from "../../../../../../components/Modal";
 import { Select } from "../../../../../../components/Select";
 import { useEditAccountModalController } from "./useEditAccountModalController";
+import { TrashIcon } from "../../../../../../components/icons/TrashIcon";
+import { ConfirmDeleteModal } from "../../../../../../components/ConfirmDeleteModal";
 
 export function EditAccountModal() {
   const {
@@ -16,13 +18,35 @@ export function EditAccountModal() {
     handleSubmit,
     control,
     isPending,
+    isDeleteModalOpen,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+    handleDeleteAccount,
+    isLoadingDelete,
   } = useEditAccountModalController()
+
+  if(isDeleteModalOpen) {
+    return (
+      <ConfirmDeleteModal
+        isLoading={isLoadingDelete}
+        onConfirm={handleDeleteAccount}
+        onClose={handleCloseDeleteModal}
+        title="Tem certeza que deseja excluir esta conta?"
+        description="Ao excluir a conta, também serão exlcuídos todos os registros de receita e despesas relacionados."
+      />
+    )
+  }
 
   return(
     <Modal
       title="Editar Conta"
       open={isEditAccountModalOpen}
       onClose={closeEditAccountModal}
+      rightAction={(
+        <button onClick={handleOpenDeleteModal}>
+          <TrashIcon className="h-6 w-6 text-red-900" />
+        </button>
+      )}
     >
       <form onSubmit={handleSubmit}>
         <div>
@@ -96,7 +120,7 @@ export function EditAccountModal() {
         </div>
 
         <Button type="submit" className="w-full mt-6" isPending={isPending}>
-          Criar
+          Salvar
         </Button>
       </form>
     </Modal>

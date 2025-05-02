@@ -3,8 +3,8 @@ import { useDashboard } from "../../useDashboard";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { bankAccountService } from "../../../../../../../app/services/bankAccountService";
-import { BankAccountParams } from "../../../../../../../app/services/bankAccountService/create";
+import { bankAccountService } from "../../../../../../../app/services/bankAccountsService";
+import { CreateBankAccountParams } from "../../../../../../../app/services/bankAccountsService/create";
 import toast from 'react-hot-toast';
 
 const schema = z.object({
@@ -35,7 +35,7 @@ export function useNewAccountModalController() {
     })
 
     const { isPending, mutateAsync } = useMutation({
-      mutationFn: async (data: BankAccountParams) => {
+      mutationFn: async (data: CreateBankAccountParams) => {
         return await bankAccountService.create(data)
       }
     })

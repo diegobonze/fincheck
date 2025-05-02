@@ -16,8 +16,6 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [isEditAccountModalOpen, setIsEditAccountModalOpen] = useState(false)
   const [accountBeingEdited, setAccountBeingEdited] = useState<null | BankAccount>(null)
 
-  console.log(isEditAccountModalOpen)
-
   const openNewAccountModal = useCallback(() => {
     setIsNewAccountModalOpen(true)
   }, [])
@@ -52,7 +50,8 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const closeEditAccountModal = useCallback(() => {
-    setAccountBeingEdited(null)
+
+    setTimeout(() => {setAccountBeingEdited(null)}, 50)
     setTimeout(() => {setIsEditAccountModalOpen(false)}, 50)
   }, [])
 
