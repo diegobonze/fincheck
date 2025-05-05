@@ -11,6 +11,7 @@ import { Spinner } from "../../../../components/Spinner";
 import emptyStateImage from "./../../../../../assets/empty-state.svg"
 import { TransactionDropdown } from "./TransactionDropdown";
 import { FiltersModal } from './FiltersModal';
+import { FormatDate } from '../../../../../app/utils/formatDate';
 
 export function Transactions() {
   const {
@@ -19,8 +20,11 @@ export function Transactions() {
     isInitialLoading,
     isLoading,
     isFilterModalOpen,
+    filters,
     handleOpenFilterModal,
     handleCloseFilterModal,
+    handleChangeFilters,
+    handleApplyFilters,
   } = useTransactionController()
 
   const hasTransactions = transactions.length > 0
@@ -39,11 +43,15 @@ export function Transactions() {
           <FiltersModal
             open={isFilterModalOpen}
             onClose={handleCloseFilterModal}
+            onApplyFilters={handleApplyFilters}
           />
 
           <header>
             <div className="flex items-center justify-between">
-              <TransactionDropdown />
+              <TransactionDropdown
+                onSelect={handleChangeFilters('type')}
+                selectedType={filters.type}
+              />
 
               <button onClick={handleOpenFilterModal}>
                 <FilterIcon />
@@ -52,6 +60,10 @@ export function Transactions() {
 
             <div className="mt-6 relative">
               <Swiper
+                onSlideChange={swiper => {
+                  handleChangeFilters('month')(swiper.realIndex)
+                }}
+                initialSlide={filters.month}
                 slidesPerView={3}
                 centeredSlides
               >
@@ -88,42 +100,31 @@ export function Transactions() {
               </div>
             )}
 
-            {(hasTransactions && !isLoading) && (
-              <>
-                <div className="bg-white rounded-2xl flex items-center justify-between p-4 gap-4">
+            {(hasTransactions && !isLoading) &&
+              transactions.map(transaction => (
+                <div key={transaction.id} className="bg-white rounded-2xl flex items-center justify-between p-4 gap-4">
                   <div className="flex-1 flex items-center gap-3">
-                    <CategoryIcon type="expense" />
+                    <CategoryIcon
+                      type={transaction.type === "EXPENSE" ? 'expense' : 'income'}
+                      category={transaction.category?.icon}
+                    />
 
                     <div>
-                      <strong className="font-bold tracking-[-0.5px] block">Almoço</strong>
-                      <span className="text-sm text-gray-600">04/06/2025</span>
+                      <strong className="font-bold tracking-[-0.5px] block">{transaction.name}</strong>
+                      <span className="text-sm text-gray-600">{FormatDate(new Date(transaction.date))}</span>
                     </div>
                   </div>
 
                   <span className={cn(
-                    "text-red-800 tracking-[-0.5px] font-medium",
+                    "tracking-[-0.5px] font-medium",
+                    transaction.type === 'EXPENSE' ? 'text-red-800' : 'text-green-800',
                     areValuesNotVisible && 'blur-sm'
                   )}>
-                    {formatCurrency(123)}
+                    {transaction.type === 'EXPENSE' ? '-' : '+'}
+                    {formatCurrency(transaction.value)}
                   </span>
                 </div>
-
-                <div className="bg-white rounded-2xl flex items-center justify-between p-4 gap-4">
-                  <div className="flex-1 flex items-center gap-3">
-                    <CategoryIcon type="income" />
-
-                    <div>
-                      <strong className="font-bold tracking-[-0.5px] block">Almoço</strong>
-                      <span className="text-sm text-gray-600">04/06/2025</span>
-                    </div>
-                  </div>
-
-                  <span className="text-green-800 tracking-[-0.5px] font-medium">
-                    {formatCurrency(123)}
-                  </span>
-                </div>
-              </>
-            )}
+              ))}
           </div>
         </>
       )}

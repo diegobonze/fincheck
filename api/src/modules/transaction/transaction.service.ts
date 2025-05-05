@@ -45,11 +45,13 @@ export class TransactionService {
 
   }
 
-  findManyByUserId(userId: string, filters: { 
-    month: number; 
-    year: number; 
-    bankAccountId?: string;
-    type?: TrnasactionType;
+  findManyByUserId(
+    userId: string, 
+    filters: { 
+      month: number; 
+      year: number; 
+      bankAccountId?: string;
+      type?: TrnasactionType;
   }) {
     return this.transactionsRepo.findMany({
       where: { 
@@ -61,6 +63,15 @@ export class TransactionService {
           lte: new Date(Date.UTC(filters.year, filters.month + 1)),
         }
       },
+      include: {
+        category: {
+          select: {
+            id: true,
+            name: true,
+            icon: true,
+          }
+        }
+      }
     })
   }
 

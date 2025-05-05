@@ -1,35 +1,22 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { Modal } from "../../../../../components/Modal";
 import { Button } from "../../../../../components/Button";
-import { useFiltersModal } from "./useFiltersModal";
+import { useFiltersModal } from "./useFiltersModalController";
 import { cn } from "../../../../../../app/utils/cn";
 
 interface FilterModalProps {
   open: boolean
   onClose(): void
+  onApplyFilters(filters: { bankAccountId: string | undefined; year: number }): void
 }
 
-const mockedAccount = [
-  {
-    id: '123',
-    name: 'Nubank'
-  },
-  {
-    id: '456',
-    name: 'XP Investimentos'
-  },
-  {
-    id: '789',
-    name: 'Dinheiro'
-  },
-]
-
-export function FiltersModal({ open, onClose }: FilterModalProps) {
+export function FiltersModal({ open, onClose, onApplyFilters }: FilterModalProps) {
   const {
     handleSetSelectedBankAccount,
     selectedBankAccountId,
     handleSelectedDate,
     selectedDate,
+    accounts,
   } = useFiltersModal()
 
   return (
@@ -44,10 +31,10 @@ export function FiltersModal({ open, onClose }: FilterModalProps) {
         </span>
 
         <div className="space-y-2 mt-2">
-          {mockedAccount.map(account => (
+          {accounts.map(account => (
             <button
-              onClick={() => handleSetSelectedBankAccount(account.id)}
               key={account.id}
+              onClick={() => handleSetSelectedBankAccount(account.id)}
               className={cn(
                 'p-2 rounded-2xl w-full text-left text-gray-800 hover:bg-gray-50 transition-colors',
                 account.id === selectedBankAccountId && '!bg-gray-200'
@@ -87,7 +74,11 @@ export function FiltersModal({ open, onClose }: FilterModalProps) {
         </div>
       </div>
 
-      <Button className="w-full mt-10">
+      <Button className="w-full mt-10" onClick={() => onApplyFilters({
+        bankAccountId: selectedBankAccountId,
+        year: selectedDate
+      })}
+        >
         Aplicar Filtros
       </Button>
     </Modal>
