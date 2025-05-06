@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import { useDashboard } from "../DashboardContext/useDashboard";
 import { useTransactions } from "../../../../../app/hooks/useTrancastions";
 import { TransactionFilters } from "../../../../../app/services/transactions/getAll";
+import { Transaction } from "../../../../../entities/Transaction";
 
 export function useTransactionController () {
   const {
     areValuesNotVisible,
   } = useDashboard()
+
+  const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] = useState(false)
+  const [transactionBeingEdit, setTransactionBeingEdit] = useState<null | Transaction>(null)
 
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false)
   const [filters, setFilters] = useState<TransactionFilters>({
@@ -50,6 +54,16 @@ export function useTransactionController () {
     setIsFilterModalOpen(false)
   }
 
+  function handleOpenEditModal(transaction: Transaction) {
+    setIsEditTransactionModalOpen(true)
+    setTransactionBeingEdit(transaction)
+  }
+
+  function handleCloseEditModal() {
+    setTimeout(() => setIsEditTransactionModalOpen(false), 50)
+    setTimeout(() => setTransactionBeingEdit(null), 50)
+  }
+
   return {
     areValuesNotVisible,
     transactions,
@@ -61,5 +75,9 @@ export function useTransactionController () {
     handleChangeFilters,
     filters,
     handleApplyFilters,
+    handleOpenEditModal,
+    handleCloseEditModal,
+    isEditTransactionModalOpen,
+    transactionBeingEdit,
   }
 }

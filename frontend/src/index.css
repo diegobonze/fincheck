@@ -149,6 +149,8 @@
   --animate-overlay-show: overlay-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
   --animate-content-show: content-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
 
+  --font-display: "DM Sans", "sans-serif";
+
   @keyframes slide-up-and-fade {
     0% {
       opacity: 0;

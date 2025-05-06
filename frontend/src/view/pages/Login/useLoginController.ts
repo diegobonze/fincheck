@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 
 import { authService } from '../../../app/services/authService'
 import { SigninParams } from '../../../app/services/authService/signin'
-import { useAuth } from '../../../app/hooks/useAuth'
+import { useAuth } from '../../../app/contexts/useAuth'
 
 const schema = z.object({
   email: z.string().email('Insira um E-mail válido.').nonempty('E-mail é obrigatório.'),

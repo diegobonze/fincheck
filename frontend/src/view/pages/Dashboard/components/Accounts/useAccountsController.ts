@@ -22,7 +22,7 @@ export function useAccountsController() {
 
   const currancyBalance = useMemo(() => {
     return accounts.reduce((total, account) => total + account.currentBalance, 0)
-  }, [accounts])
+  }, [accounts, ])
 
   return {
     sliderState,

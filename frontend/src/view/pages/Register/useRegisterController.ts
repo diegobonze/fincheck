@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast'
 
 import { SignupParams } from "../../../app/services/authService/signup";
 import { authService } from "../../../app/services/authService";
-import { useAuth } from "../../../app/hooks/useAuth";
+import { useAuth } from "../../../app/contexts/useAuth";
 
 const schema = z.object({
   name: z.string().nonempty('Nome é obrigatório.'),

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { AuthContext } from "../hooks/useAuth";
+import { AuthContext } from "./useAuth";
 import { localStorageKeys } from "../config/localStorageKeys";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { usersService } from "../services/usersService";
@@ -16,7 +16,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const queryClient = useQueryClient()
 
-  const { isError, isFetching, isSuccess } = useQuery({
+  const { isError, isFetching, isSuccess, data } = useQuery({
     queryKey:['users', 'me'],
     queryFn: () => usersService.me(),
     enabled: signedIn,
@@ -48,6 +48,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         signedIn: isSuccess && signedIn,
         signin,
         signout,
+        user: data
       }}
     >
       <LaunchScreen isLoading={isFetching} />

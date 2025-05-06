@@ -1,9 +1,7 @@
+import { User } from "../../../entities/User";
 import { httpCliente } from "../httpClient";
 
-interface MeResponse {
-  email: string;
-  password: string;
-}
+type MeResponse = User
 export async function me() {
   const { data } = await httpCliente.get<MeResponse>('/users/me')
 
