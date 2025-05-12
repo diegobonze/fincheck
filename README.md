@@ -14,20 +14,20 @@
 <br>
 
 <p align="center">
-  <img alt="home" src="./frontend/.github/home.png" width="50%">
+  <img alt="home" src="./frontend/.github/home.png" width="70%">
 </p>
 
 <p align="center">
-  <img alt="dashboard" src="./frontend/.github/dashboard.png" width="50%">
+  <img alt="dashboard" src="./frontend/.github/dashboard.png" width="70%">
 </p>
 
 ## 🚀 Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-- HTML e CSS
 - [TypeScript](https://www.typescriptlang.org/)
 - [React](https://react.dev/)
+- [Tailwindcss](https://tailwindcss.com/)
 - [JWT](https://articles.wesionary.team/react-hook-form-schema-validation-using-zod-80d406e22cd8)
 - [Node.js](https://nodejs.org/pt)
 - [NestJS](https://nestjs.com/)
