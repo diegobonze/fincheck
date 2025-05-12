@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <img alt="dashboard" src="./frontend/.github/dashboard.png.png" width="50%">
+  <img alt="dashboard" src="./frontend/.github/dashboard.png" width="50%">
 </p>
 
 ## 🚀 Tecnologias
