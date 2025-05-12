@@ -14,11 +14,11 @@
 <br>
 
 <p align="center">
-  <img alt="rocketpay" src=".github/home.png" width="500%">
+  <img alt="home" src="./frontend/.github/home.png" width="50%">
 </p>
 
 <p align="center">
-  <img alt="rocketpay" src=".github/dashboard.png" width="50%">
+  <img alt="dashboard" src="./frontend/.github/dashboard.png.png" width="50%">
 </p>
 
 ## 🚀 Tecnologias
