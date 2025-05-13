@@ -14,11 +14,11 @@
 <br>
 
 <p align="center">
-  <img alt="home" src="./frontend/.github/home.png" width="70%">
+  <img alt="home" src="./frontend/.github/home.png" width="60%">
 </p>
 
 <p align="center">
-  <img alt="dashboard" src="./frontend/.github/dashboard.png" width="70%">
+  <img alt="dashboard" src="./frontend/.github/dashboard.png" width="60%">
 </p>
 
 ## 🚀 Tecnologias
